@@ -13,12 +13,13 @@ public class TokenService(IConfiguration configuration)
     //public ILoginResponse GenerarToken(string email)
     {
         string email = credenciales[0];
+        string rol = credenciales[1];
 
         // Los claims construyen la información que va en el payload del token
         List<Claim> claims =
         [
             new Claim(ClaimTypes.Email, email),
-            new Claim(ClaimTypes.Role, "Foo"),
+            new Claim(ClaimTypes.Role, rol),
         ];
 
         // Necesitamos la clave de generación de tokens

@@ -33,6 +33,7 @@ builder.Services
     });
 
 #region TRANSIENTs
+builder.Services.AddTransient<SueldoService>();
 builder.Services.AddTransient<HashService>();
 builder.Services.AddTransient<TokenService>();
 #endregion TRANSIENTs

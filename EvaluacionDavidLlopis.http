@@ -1,7 +1,24 @@
 @EvaluacionDavidLlopis_HostAddress = http://localhost:5106
 
-GET {{EvaluacionDavidLlopis_HostAddress}}/api/
+POST {{EvaluacionDavidLlopis_HostAddress}}/register
 Accept: */*
 Content-Type: application/json
 
+{
+  "email": "yo@gmail.com",
+  "password": "12345",
+  "rol": "ADMIN"
+}
 ###
+
+POST {{EvaluacionDavidLlopis_HostAddress}}/login
+Accept: */*
+Content-Type: application/json
+
+{
+  "email": "yo@gmail.com",
+  "password": "12345",
+  "rol": "ADMIN"
+}
+###
+

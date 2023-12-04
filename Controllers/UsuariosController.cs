@@ -3,6 +3,7 @@ using EvaluacionDavidLlopis.Interfaces;
 using EvaluacionDavidLlopis.Models;
 using EvaluacionDavidLlopis.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EvaluacionDavidLlopis.Controllers;
 [Route("api/[controller]")]
@@ -16,13 +17,13 @@ public class UsuariosController(
     [HttpPost("/register")]
     public async Task<IActionResult> Register([FromBody] DTOUsuario input)
     {
-        // Buscamos en BD para comprovar que no exista ningun usuario ya registrado con el email introducido
-        Usuario? existeUsuario = await DbContext.Usuarios.FindAsync(input.Email);
+        //// Buscamos en BD para comprovar que no exista ningun usuario ya registrado con el email introducido
+        //Usuario? existeUsuario = await DbContext.Usuarios.FindAsync(input.Email);
 
-        if (existeUsuario is not null)
-        {
-            return BadRequest($"El email {input.Email} ya está registrado");
-        }
+        //if (existeUsuario is not null)
+        //{
+        //    return BadRequest($"El email {input.Email} ya está registrado");
+        //}
 
         // Encriptamos la contraseña y recuperamos su hash y su salt
         IHashResult hashResult = hashService.GetHash(input.Password);
@@ -33,6 +34,7 @@ public class UsuariosController(
             Email = input.Email,
             Password = hashResult.Hash,
             Salt = hashResult.Salt,
+            Rol = input.Rol
         };
 
         // añadimos el nuevo usuario a BD y guardamos los cambios
@@ -46,7 +48,8 @@ public class UsuariosController(
     public async Task<IActionResult> Login([FromBody] DTOUsuario input)
     {
         // Buscamos en BD para comprobar que exista un usuario registrado con el email introducido
-        Usuario? usuarioBD = await DbContext.Usuarios.FindAsync(input.Email);
+        Usuario? usuarioBD = await DbContext.Usuarios
+            .FirstOrDefaultAsync((x) => x.Email == input.Email);
 
         if (usuarioBD is null)
         {
@@ -62,7 +65,7 @@ public class UsuariosController(
             return Unauthorized("Credenciales incorrectas");
         }
 
-        Interfaces.ILoginResponse loginResponse = tokenService.GenerarToken(input.Email);
+        Interfaces.ILoginResponse loginResponse = tokenService.GenerarToken(input.Email, usuarioBD.Rol ?? "default");
 
         return Ok(loginResponse);
     }

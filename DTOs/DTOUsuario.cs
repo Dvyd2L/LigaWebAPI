@@ -1,3 +1,3 @@
 ﻿namespace EvaluacionDavidLlopis.DTOs;
 
-public record DTOUsuario(string Email, string Password);
+public record DTOUsuario(string Email, string Password, string? Rol);
