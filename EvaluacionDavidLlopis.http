@@ -1,0 +1,7 @@
+@EvaluacionDavidLlopis_HostAddress = http://localhost:5106
+
+GET {{EvaluacionDavidLlopis_HostAddress}}/api/
+Accept: */*
+Content-Type: application/json
+
+###
