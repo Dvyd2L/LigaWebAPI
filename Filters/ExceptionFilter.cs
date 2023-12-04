@@ -16,7 +16,12 @@ public class ExceptionFilter(IWebHostEnvironment env)
 
         using (StreamWriter writer = new(_logFilePath, append: true))
         {
-            writer.WriteLine($@"{IP} - {metodo} - {ruta} - {error} - {DateTime.Now}");
+            writer.WriteLine($@"
+IP: {IP,25}
+Método: {metodo,25}
+Ruta: {ruta,25}
+Error: {error,25}
+Fecha: {DateTime.Now,25}");
         }
 
         base.OnException(context);
