@@ -96,6 +96,14 @@ public class JugadoresController(
             return BadRequest($"Ya hay un jugador llamado {input.Nombre}");
         }
 
+        bool existeEquipoDB = await DbContext.Equipos
+            .AnyAsync((e) => e.Id == input.EquipoId);
+
+        if (!existeEquipoDB)
+        {
+            return BadRequest($"No existe ningun equipo con ID {input.EquipoId}");
+        }
+
         Jugadore newItem = new()
         {
             Nombre = input.Nombre,
