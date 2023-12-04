@@ -31,7 +31,7 @@ public class LogRequestMiddleware(RequestDelegate next, IWebHostEnvironment env)
 
     private void LogWriter(string IP, string ruta)
     {
-        using (StreamWriter writer = new(_logFile))
+        using (StreamWriter writer = new(_logFile, append: true))
         {
             writer.WriteLine($"{DateTime.Now} - {IP} - {ruta}");
         }

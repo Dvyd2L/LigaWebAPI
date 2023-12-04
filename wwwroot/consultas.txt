@@ -1,1 +1,5 @@
-04/12/2023 13:06:47 - ::1 - /api/Jugadores
+04/12/2023 13:09:50 - ::1 - /api/Jugadores/agrupados
+04/12/2023 13:10:53 - ::1 - /api/Equipos
+04/12/2023 13:10:58 - ::1 - /api/Jugadores
+04/12/2023 13:11:03 - ::1 - /api/Jugadores/custom
+04/12/2023 13:11:08 - ::1 - /api/Jugadores/agrupados

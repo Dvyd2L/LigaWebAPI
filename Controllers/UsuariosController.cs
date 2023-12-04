@@ -17,14 +17,6 @@ public class UsuariosController(
     [HttpPost("/register")]
     public async Task<IActionResult> Register([FromBody] DTOUsuario input)
     {
-        //// Buscamos en BD para comprovar que no exista ningun usuario ya registrado con el email introducido
-        //Usuario? existeUsuario = await DbContext.Usuarios.FindAsync(input.Email);
-
-        //if (existeUsuario is not null)
-        //{
-        //    return BadRequest($"El email {input.Email} ya está registrado");
-        //}
-
         // Encriptamos la contraseña y recuperamos su hash y su salt
         IHashResult hashResult = hashService.GetHash(input.Password);
 
