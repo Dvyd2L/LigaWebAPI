@@ -3,8 +3,8 @@
 public class LogRequestMiddleware(RequestDelegate next, IWebHostEnvironment env)
 {
     #region PROPs
-    private readonly string logFile = $@"{env.ContentRootPath}\wwwroot\log.txt";
-    private readonly string IPv6Baneada = "::1";
+    private readonly string _logFile = $@"{env.ContentRootPath}\wwwroot\consultas.txt";
+    //private readonly string _IPv6Baneada = "::1";
     #endregion
 
     #region METHODs
@@ -21,30 +21,32 @@ public class LogRequestMiddleware(RequestDelegate next, IWebHostEnvironment env)
         string metodo = httpContext.Request.Method;
         string ruta = httpContext.Request.Path.ToString();
 
-        LogWriter(IP, metodo, ruta);
-        await PostIPBlocker(httpContext, IP, metodo);
+        if (HttpMethods.IsGet(metodo))
+        {
+            LogWriter(IP, ruta);
+        }
 
         await next(httpContext);
     }
 
-    private void LogWriter(string IP, string metodo, string ruta)
+    private void LogWriter(string IP, string ruta)
     {
-        using (StreamWriter writer = new(logFile))
+        using (StreamWriter writer = new(_logFile))
         {
-            writer.WriteLine($"{DateTime.Now} - {IP} - {metodo} - {ruta}");
+            writer.WriteLine($"{DateTime.Now} - {IP} - {ruta}");
         }
     }
 
-    private async Task PostIPBlocker(HttpContext httpContext, string IP, string metodo)
-    {
-        bool isInvalidMethod = HttpMethods.IsPost(metodo);
+    //private async Task PostIPBlocker(HttpContext httpContext, string IP, string metodo)
+    //{
+    //    bool isInvalidMethod = HttpMethods.IsPost(metodo);
 
-        if (IP == IPv6Baneada && isInvalidMethod) // Bloquearía las peticiones POST de una IP concreta
-        {
-            httpContext.Response.StatusCode = 401;
-            httpContext.Response.ContentType = "plain/text";
-            await httpContext.Response.WriteAsync("No tienes derecho");
-        }
-    }
+    //    if (IP == _IPv6Baneada && isInvalidMethod) // Bloquearía las peticiones POST de una IP concreta
+    //    {
+    //        httpContext.Response.StatusCode = 401;
+    //        httpContext.Response.ContentType = "plain/text";
+    //        await httpContext.Response.WriteAsync("No tienes derecho");
+    //    }
+    //}
     #endregion
 }
