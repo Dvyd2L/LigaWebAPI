@@ -56,13 +56,13 @@ public class JugadoresController(
             .GroupBy((x) => x.Lesionado)
             .Select((g) => new
             {
-                g.Key,
-                TotalLesionados = g.Select((x) => x.Lesionado),
-                TotalNoLesionados = g.Select((x) => !x.Lesionado),
+                Lesionados = g.Key,
+                TotalLesionados = g.Count((x) => x.Lesionado),
+                TotalNoLesionados = g.Count((x) => !x.Lesionado),
                 Jugadores = g.Select((x) => new
                 {
-                    Nombre = g.Select((x) => x.Nombre),
-                    Equipo = g.Select((x) => x.Equipo.Nombre),
+                    x.Nombre,
+                    Equipo = x.Equipo.Nombre,
                 }).ToList(),
             }).ToArrayAsync();
 
