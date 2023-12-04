@@ -133,6 +133,14 @@ public class JugadoresController(
             return NotFound($"No existe ningun registro con ID: {pk}");
         }
 
+        bool existeEquipoDB = await DbContext.Equipos
+            .AnyAsync((e) => e.Id == input.EquipoId);
+
+        if (!existeEquipoDB)
+        {
+            return BadRequest($"No existe ningun equipo con ID {input.EquipoId}");
+        }
+
         jugadorDB.Nombre = input.Nombre;
         jugadorDB.Edad = input.Edad;
         jugadorDB.Sueldo = input.Sueldo;
@@ -168,10 +176,10 @@ public class JugadoresController(
 
     #region PATCH
     [Authorize]
-    //[HttpPatch("reducir-salario/{porcentaje:int}")]
-    //public async Task<IActionResult> Patch([FromRoute] int porcentaje)
-    [HttpPatch("reducir-salario")]
-    public async Task<IActionResult> Patch([FromBody] int porcentaje)
+    [HttpPatch("reducir-salario/{porcentaje:int}")]
+    public async Task<IActionResult> Patch([FromRoute] int porcentaje)
+    //[HttpPatch("reducir-salario")]
+    //public async Task<IActionResult> Patch([FromBody] int porcentaje)
     {
         IEnumerable<Jugadore>? updatedItems = await sueldoService.ReducirSueldo(porcentaje);
 
