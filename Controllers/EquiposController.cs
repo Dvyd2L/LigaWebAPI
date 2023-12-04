@@ -32,6 +32,7 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
     public async Task<IActionResult> Delete([FromRoute] int pk)
     {
         Equipo? equipoDB = await DbContext.Equipos
+            .Include((x) => x.Jugadores)
             .AsTracking()
             .FirstOrDefaultAsync(x => x.Id == pk);
 
@@ -56,6 +57,7 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
     public async Task<IActionResult> DeleteFull([FromRoute] int pk)
     {
         Equipo? equipoDB = await DbContext.Equipos
+            .Include((x) => x.Jugadores)
             .AsTracking()
             .FirstOrDefaultAsync(x => x.Id == pk);
 
