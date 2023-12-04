@@ -70,7 +70,7 @@ public class JugadoresController(
     }
     #endregion GET
 
-    #region POST
+    #region POST ✅
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] DTOJugadorInput input)
     {
@@ -106,7 +106,7 @@ public class JugadoresController(
     }
     #endregion POST
 
-    #region PUT
+    #region PUT ✅
     [HttpPut("{pk}")]
     public async Task<IActionResult> Put([FromRoute] int pk, [FromBody] DTOJugadorInput input)
     {
@@ -158,7 +158,7 @@ public class JugadoresController(
     }
     #endregion PUT
 
-    #region PATCH
+    #region PATCH ✅
     [HttpPatch("reducir-salario/{porcentaje:int}")]
     public async Task<IActionResult> Patch([FromRoute] int porcentaje)
     //[HttpPatch("reducir-salario")]
@@ -175,8 +175,4 @@ public class JugadoresController(
         return NoContent();
     }
     #endregion PATCH
-
-    #region DELETE
-
-    #endregion DELETE
 }

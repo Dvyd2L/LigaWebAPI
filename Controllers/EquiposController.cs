@@ -18,14 +18,6 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
     }
     #endregion GET
 
-    #region POST
-
-    #endregion POST
-
-    #region PUT
-
-    #endregion PUT
-
     #region DELETE ✅
     [Authorize]
     [HttpDelete("{pk}")]
