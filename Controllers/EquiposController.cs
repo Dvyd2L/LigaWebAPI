@@ -8,7 +8,7 @@ namespace EvaluacionDavidLlopis.Controllers;
 [ApiController]
 public class EquiposController(LigaContext DbContext) : ControllerBase
 {
-    #region GET
+    #region GET ✅
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Equipo>>> Get()
     {
@@ -26,7 +26,7 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
 
     #endregion PUT
 
-    #region DELETE
+    #region DELETE ✅
     [Authorize]
     [HttpDelete("{pk}")]
     public async Task<IActionResult> Delete([FromRoute] int pk)

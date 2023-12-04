@@ -14,7 +14,7 @@ public class JugadoresController(
     SueldoService sueldoService
     ) : ControllerBase
 {
-    #region GET
+    #region GET ✅
     [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Jugadore>>> Get()

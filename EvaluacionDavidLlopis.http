@@ -17,8 +17,7 @@ Content-Type: application/json
 
 {
   "email": "yo@gmail.com",
-  "password": "12345",
-  "rol": "ADMIN"
+  "password": "12345"
 }
 ###
 
