@@ -27,23 +27,6 @@ public class JugadoresController(
     [HttpGet("custom")]
     public async Task<ActionResult<IEnumerable<DTOJugadoresCustom>>> GetCustom()
     {
-        //DTOJugadoresCustom[] result = await DbContext.Jugadores
-        //    .Select((x) => new DTOJugadoresCustom()
-        //    {
-        //        IdEquipo = x.EquipoId,
-        //        Nombre = x.Equipo.Nombre,
-        //        Ciudad = x.Equipo.Ciudad,
-        //        PromedioEdad = x.Equipo.Jugadores.Average((j) => j.Edad),
-        //        ListaJugadores = x.Equipo.Jugadores
-        //            .Select((j) => new DTOListaJugadores()
-        //            {
-        //                IdJugador = j.Id,
-        //                Nombre = j.Nombre,
-        //                Edad = j.Edad,
-        //                Sueldo = j.Sueldo,
-        //            }).ToList(),
-        //    }).ToArrayAsync();
-
         DTOJugadoresCustom[] result = await DbContext.Equipos
         .Select((x) => new DTOJugadoresCustom()
         {
