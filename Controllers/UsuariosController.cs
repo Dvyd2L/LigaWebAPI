@@ -12,7 +12,7 @@ public class UsuariosController(
     LigaContext DbContext,
     HashService hashService,
     TokenService tokenService
-    ) : ControllerBase
+    ) : ControllerBase, IRegister, ILogin
 {
     [HttpPost("/register")]
     public async Task<IActionResult> Register([FromBody] DTOUsuario input)
