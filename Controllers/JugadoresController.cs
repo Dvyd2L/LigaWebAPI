@@ -8,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 namespace EvaluacionDavidLlopis.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class JugadoresController(
     LigaContext DbContext,
     SueldoService sueldoService
     ) : ControllerBase
 {
     #region GET
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Jugadore>>> Get()
     {
@@ -62,6 +64,7 @@ public class JugadoresController(
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpGet("agrupados")]
     public async Task<IActionResult> GetAgrupados()
     {
@@ -84,7 +87,6 @@ public class JugadoresController(
     #endregion GET
 
     #region POST
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] DTOJugadorInput input)
     {
@@ -121,7 +123,6 @@ public class JugadoresController(
     #endregion POST
 
     #region PUT
-    [Authorize]
     [HttpPut("{pk}")]
     public async Task<IActionResult> Put([FromRoute] int pk, [FromBody] DTOJugadorInput input)
     {
@@ -153,7 +154,6 @@ public class JugadoresController(
         return NoContent();
     }
 
-    [Authorize]
     [HttpPut("aumentar-salario/{pk}")]
     public async Task<IActionResult> Put([FromRoute] int pk, [FromBody] int porcentaje)
     {
@@ -175,7 +175,6 @@ public class JugadoresController(
     #endregion PUT
 
     #region PATCH
-    [Authorize]
     [HttpPatch("reducir-salario/{porcentaje:int}")]
     public async Task<IActionResult> Patch([FromRoute] int porcentaje)
     //[HttpPatch("reducir-salario")]

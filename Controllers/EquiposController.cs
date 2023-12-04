@@ -1,4 +1,5 @@
 ﻿using EvaluacionDavidLlopis.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
     #endregion PUT
 
     #region DELETE
+    [Authorize]
     [HttpDelete("{pk}")]
     public async Task<IActionResult> Delete([FromRoute] int pk)
     {
@@ -49,6 +51,7 @@ public class EquiposController(LigaContext DbContext) : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("full/{pk}")]
     public async Task<IActionResult> DeleteFull([FromRoute] int pk)
     {
