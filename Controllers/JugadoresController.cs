@@ -24,6 +24,7 @@ public class JugadoresController(
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpGet("custom")]
     public async Task<ActionResult<IEnumerable<DTOJugadoresCustom>>> GetCustom()
     {
